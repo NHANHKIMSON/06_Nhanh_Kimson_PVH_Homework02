@@ -46,18 +46,6 @@ public class CheckingAccount extends Account {
     }
 
     @Override
-//    void display() {
-//        System.out.println(Main.Colors.YELLOW + "\n===== Account Information =====" + Main.Colors.RESET);
-//        System.out.println("Account Number: " + accountNumber);
-//        System.out.println("User Name: " + userName);
-//        System.out.println("Date of Birth: " + dateOfBirth);
-//        System.out.println("Gender: " + gender);
-//        System.out.println("Phone Number: " + phoneNumber);
-//        System.out.println("Balance: $" + balance);
-//        System.out.println(Main.Colors.YELLOW + "===============================" + Main.Colors.RESET);
-//
-//    }
-
     void display() {
         System.out.println(Main.Colors.YELLOW + "\n========================================");
         System.out.printf("%s%-20s%s%n", Main.Colors.BLUE, "===== Account Information =====", Main.Colors.RESET);

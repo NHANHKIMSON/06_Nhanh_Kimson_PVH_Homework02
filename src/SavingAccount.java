@@ -10,7 +10,7 @@ public class SavingAccount extends Account {
     @Override
     void deposit(double amount) {
         balance += amount;
-        System.out.println(Main.Colors.GREEN + "You have Deposit $" + amount  + " into your Saving account" + Main.Colors.RESET);
+        System.out.println(Main.Colors.GREEN + "You have Deposit $" + amount  + " into your Saving account " + Main.Colors.RESET);
     }
 
     @Override
@@ -43,16 +43,6 @@ public class SavingAccount extends Account {
     }
 
     @Override
-//    void display() {
-//        System.out.println("Account Number: " + accountNumber);
-//        System.out.println("User Name: " + userName);
-//        System.out.println("Date of Birth: " + dateOfBirth);
-//        System.out.println("Gender: " + gender);
-//        System.out.println("Phone Number: " + phoneNumber);
-//        System.out.println("Balance: $" + balance);
-//        System.out.println(Main.Colors.YELLOW + "===============================" + Main.Colors.RESET);
-//    }
-
     void display() {
         System.out.println(Main.Colors.YELLOW + "\n========================================");
         System.out.printf("%s%-20s%s%n", Main.Colors.BLUE, "===== Account Information =====", Main.Colors.RESET);
@@ -68,6 +58,16 @@ public class SavingAccount extends Account {
 
         System.out.println(Main.Colors.YELLOW + "========================================" + Main.Colors.RESET);
     }
+//    void display() {
+//        System.out.println("Account Number: " + accountNumber);
+//        System.out.println("User Name: " + userName);
+//        System.out.println("Date of Birth: " + dateOfBirth);
+//        System.out.println("Gender: " + gender);
+//        System.out.println("Phone Number: " + phoneNumber);
+//        System.out.println("Balance: $" + balance);
+//        System.out.println(Main.Colors.YELLOW + "===============================" + Main.Colors.RESET);
+//    }
+
 //    -----------------------------------------------------------
 
 

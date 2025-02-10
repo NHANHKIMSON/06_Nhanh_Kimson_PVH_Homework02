@@ -197,7 +197,7 @@ public class Main {
                 while (true) {
                     System.out.print("Enter phone number (9 digits): ");
                     phone = scanner.nextLine();
-                    if (phone.matches("^\\d{9}$")) {
+                    if (phone.matches("^(9|1[0-2])$")) {
                         break;
                     } else {
                         System.out.println("Invalid phone number. Please enter exactly 9 digits.");
