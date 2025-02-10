@@ -15,7 +15,9 @@ public class CheckingAccount extends Account {
 
     @Override
     void withdraw(double amount) {
-        if(balance >amount){
+        if(amount > balance*0.8){
+            System.out.println("You can't not withdrew money higher than 80% in your account!");
+        }else if(balance >amount){
             balance -= amount;
         }else {
             System.out.println(Main.Colors.RED + "You don't have enough money to withdrew! you balance is:" + " $" + balance + Main.Colors.RESET);
@@ -32,8 +34,12 @@ public class CheckingAccount extends Account {
         }
     }
 
-
-
+    @Override
+    void delete(double amount, Account account) {
+        if(account == null){
+            account.deposit(amount);
+        }
+    }
 
     @Override
     void display() {

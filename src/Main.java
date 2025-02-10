@@ -39,7 +39,7 @@ public class Main {
                      displayAccountInfo();
                     break;
                 case "6":
-//                     deleteAccount();
+                     deleteAccount();
                     break;
                 case "7":
                     System.out.println(Colors.BLUE + "Exiting the system... Goodbye!" + Colors.RESET);
@@ -129,6 +129,7 @@ public class Main {
 
                 accountNumber=String.valueOf((int)(Math.random()*1000000));
                 checkingAccount = new CheckingAccount(userName, dob, gender, phone, accountNumber);
+                System.out.println(Colors.GREEN + "Checking account has created successfully!" + Colors.RESET);
 
             }else {
                 System.out.println(Colors.RED + "You are already have checking account!" + Colors.RESET );
@@ -146,6 +147,7 @@ public class Main {
 
                 accountNumber = String.valueOf((int)(Math.random()*1000000));
                 savingAccount =  new SavingAccount(userName, dob, gender, phone, accountNumber);
+                System.out.println(Colors.GREEN + "Saving account has created successfully!" + Colors.RESET);
             }else {
 
                 CellStyle centerStyle = new CellStyle(CellStyle.HorizontalAlign.center);
@@ -197,10 +199,13 @@ public class Main {
         }
     }
     public static void transferMoney(){
-        System.out.println("1. Checking account");
-        System.out.println("1. Saving account");
+        System.out.println("1. Checking account -> Saving account");
+        System.out.println("1. Saving account -> Checking account");
         System.out.print("3. back->:");
         String accountType = scanner.nextLine();
+        if(accountType.equals("3")){
+            return;
+        }
         if(accountType.equals("1") && checkingAccount !=null && savingAccount !=null){
             System.out.print("Enter amount to transfer: ");
             String amount = scanner.nextLine();
@@ -209,6 +214,27 @@ public class Main {
             System.out.print("Enter amount to transfer: ");
             String amount = scanner.nextLine();
             savingAccount.transfer(Double.parseDouble(amount), checkingAccount);
+        }else {
+            System.out.println(Colors.RED + "You must to create account to transfer!" + Colors.RESET);
+        }
+    }
+    public static void deleteAccount(){
+        System.out.println("1. Checking account");
+        System.out.println("1. Saving account");
+        System.out.print("3. back->:");
+        String accountType = scanner.nextLine();
+        if(accountType.equals("1") && checkingAccount !=null && savingAccount !=null){
+
+
+            String amount = String.valueOf(checkingAccount.getBalance());
+            checkingAccount.transfer(Double.parseDouble(amount), savingAccount);
+            checkingAccount = null;
+            System.out.println(Colors.GREEN + "Checking account has deleted successfully!" + Colors.RESET);
+        }else if(checkingAccount !=null && savingAccount !=null){
+            String amount = String.valueOf(savingAccount.getBalance());
+            savingAccount.transfer(Double.parseDouble(amount), checkingAccount);
+            savingAccount = null;
+            System.out.println(Colors.GREEN + "Saving account has deleted successfully!" + Colors.RESET);
         }else {
             System.out.println(Colors.RED + "You must to create account to transfer!" + Colors.RESET);
         }
