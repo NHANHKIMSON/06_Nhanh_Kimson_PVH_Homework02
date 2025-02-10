@@ -24,8 +24,17 @@ public class CheckingAccount extends Account {
 
     @Override
     void transfer(double amount, Account account) {
-
+        if(balance < amount){
+            System.out.println(Main.Colors.RED + "You don't have enough money to withdrew! you balance is:" + " $" + balance + Main.Colors.RESET);
+        }else {
+            balance -= amount;
+            account.deposit(amount);
+        }
     }
+
+
+
+
     @Override
     void display() {
         System.out.println(Main.Colors.YELLOW + "\n===== Account Information =====" + Main.Colors.RESET);

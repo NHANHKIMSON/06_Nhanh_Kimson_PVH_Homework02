@@ -32,7 +32,7 @@ public class Main {
                      withdrawMoney();
                     break;
                 case "4":
-//                     transferMoney();
+                     transferMoney();
                     break;
                 case "5":
                     System.out.println(Main.Colors.YELLOW + "\n===== Account Information =====" + Main.Colors.RESET);
@@ -194,6 +194,23 @@ public class Main {
             System.out.print("Enter amount to withdrew: ");
             String amount = scanner.nextLine();
             savingAccount.withdraw(Double.parseDouble(amount));
+        }
+    }
+    public static void transferMoney(){
+        System.out.println("1. Checking account");
+        System.out.println("1. Saving account");
+        System.out.print("3. back->:");
+        String accountType = scanner.nextLine();
+        if(accountType.equals("1") && checkingAccount !=null && savingAccount !=null){
+            System.out.print("Enter amount to transfer: ");
+            String amount = scanner.nextLine();
+            checkingAccount.transfer(Double.parseDouble(amount), savingAccount);
+        }else if(checkingAccount !=null && savingAccount !=null){
+            System.out.print("Enter amount to transfer: ");
+            String amount = scanner.nextLine();
+            savingAccount.transfer(Double.parseDouble(amount), checkingAccount);
+        }else {
+            System.out.println(Colors.RED + "You must to create account to transfer!" + Colors.RESET);
         }
     }
 }
