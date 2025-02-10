@@ -3,6 +3,7 @@ import org.nocrala.tools.texttablefmt.CellStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
 
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -45,7 +46,7 @@ public class Main {
                     System.out.println(Colors.BLUE + "Exiting the system... Goodbye!" + Colors.RESET);
                     System.exit(0);
                 default:
-                    System.out.println(Colors.RED + "Invalid option. Please try again." + Colors.RESET);
+//                    System.out.println(Colors.RED + "Invalid option. Please try again." + Colors.RESET);
                     promptToContinue();
             }
         }
@@ -83,6 +84,10 @@ public class Main {
 
         t.addCell(Colors.RED + "Press Enter to continue..." + Colors.RESET , centerStyle);
         System.out.println(t.render());
+        String con =  scanner.nextLine();
+        if(Objects.equals(con, "\n")){
+            return;
+        }
     }
 //  ------------------------------------------------------------------------------------------------
 
@@ -115,20 +120,47 @@ public class Main {
         System.out.print("Choose an option: ");
         int accountType = scanner.nextInt();
         scanner.nextLine();
-
+        String userName, dob, gender, phone;
         if(accountType == 1){
             if(checkingAccount == null){
-                System.out.print("Enter username: ");
-                String userName = scanner.nextLine();
-                System.out.print("Enter date of birth (dd-mm-yyyy): ");
-                String dob = scanner.nextLine();
-                System.out.print("Enter gender: ");
-                String gender = scanner.nextLine();
-                System.out.print("Enter phone number (9 digits): ");
-                String phone = scanner.nextLine();
+                while (true){
+                    System.out.print("Enter username: ");
+                    userName = scanner.nextLine();
+                    if(userName.matches("^[a-zA-Z][a-zA-Z ]*$")){
+                        break;
+                    }
+                }
+                while (true) {
+                    System.out.print("Enter date of birth (dd-mm-yyyy): ");
+                    dob = scanner.nextLine();
+                    if (dob.matches("^([0-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-(\\d{4})$")) {
+                        break;
+                    } else {
+                        System.out.println("Invalid date format. Please use dd-mm-yyyy.");
+                    }
+                }
+                while (true) {
+                    System.out.print("Enter gender (Male/Female/Other): ");
+                    gender = scanner.nextLine();
+                    if (gender.matches("(?i)^(male|female|other)$")) {
+                        break;
+                    } else {
+                        System.out.println("Invalid gender. Please enter Male, Female, or Other.");
+                    }
+                }
+
+                while (true) {
+                    System.out.print("Enter phone number (9 digits): ");
+                    phone = scanner.nextLine();
+                    if (phone.matches("^\\d{9}$")) {
+                        break;
+                    } else {
+                        System.out.println("Invalid phone number. Please enter exactly 9 digits.");
+                    }
+                }
 
                 accountNumber=String.valueOf((int)(Math.random()*1000000));
-                checkingAccount = new CheckingAccount(userName, dob, gender, phone, accountNumber);
+                checkingAccount = new CheckingAccount(accountNumber,dob,gender, phone, userName);
                 System.out.println(Colors.GREEN + "Checking account has created successfully!" + Colors.RESET);
 
             }else {
@@ -136,17 +168,43 @@ public class Main {
             }
         }else {
             if(savingAccount == null){
-                System.out.print("Enter username: ");
-                String userName = scanner.nextLine();
-                System.out.print("Enter date of birth (dd-mm-yyyy): ");
-                String dob = scanner.nextLine();
-                System.out.print("Enter gender: ");
-                String gender = scanner.nextLine();
-                System.out.print("Enter phone number (9 digits): ");
-                String phone = scanner.nextLine();
+                while (true){
+                    System.out.print("Enter username: ");
+                    userName = scanner.nextLine();
+                    if(userName.matches("^[a-zA-Z][a-zA-Z ]*$")){
+                        break;
+                    }
+                }
+                while (true) {
+                    System.out.print("Enter date of birth (dd-mm-yyyy): ");
+                    dob = scanner.nextLine();
+                    if (dob.matches("^([0-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-(\\d{4})$")) {
+                        break;
+                    } else {
+                        System.out.println("Invalid date format. Please use dd-mm-yyyy.");
+                    }
+                }
+                while (true) {
+                    System.out.print("Enter gender (Male/Female/Other): ");
+                    gender = scanner.nextLine();
+                    if (gender.matches("(?i)^(male|female|other)$")) {
+                        break;
+                    } else {
+                        System.out.println("Invalid gender. Please enter Male, Female, or Other.");
+                    }
+                }
 
+                while (true) {
+                    System.out.print("Enter phone number (9 digits): ");
+                    phone = scanner.nextLine();
+                    if (phone.matches("^\\d{9}$")) {
+                        break;
+                    } else {
+                        System.out.println("Invalid phone number. Please enter exactly 9 digits.");
+                    }
+                }
                 accountNumber = String.valueOf((int)(Math.random()*1000000));
-                savingAccount =  new SavingAccount(userName, dob, gender, phone, accountNumber);
+                savingAccount =  new SavingAccount(accountNumber,dob,gender, phone, userName);
                 System.out.println(Colors.GREEN + "Saving account has created successfully!" + Colors.RESET);
             }else {
 
@@ -161,10 +219,21 @@ public class Main {
         }
     }
     public static void depositMoney(){
-        System.out.println("1, checking account ");
-        System.out.println("2, saving account ");
-        System.out.print("Choose Account:");
-        String accountType = scanner.nextLine();
+        String accountType;
+        while (true) {
+            System.out.println("1, Checking Account ");
+            System.out.println("2, Saving Account ");
+            System.out.println("3, Back -> ");
+            System.out.print("Choose Account: ");
+            accountType = scanner.nextLine();
+
+            if (accountType.matches("^[1-3]$")) {  // Ensures input is 1, 2, or 3
+                break;
+            } else {
+                System.out.println("Invalid input. Please choose a number between 1 and 3.");
+            }
+        }
+
         if(accountType.equals("1")){
             if(checkingAccount == null){
                 System.out.println("Don't have checking account!");
@@ -185,9 +254,24 @@ public class Main {
     }
 
     public static void withdrawMoney(){
-        System.out.println("1. Checking account");
-        System.out.println("1. Saving account");
-        String accountType = scanner.nextLine();
+        String accountType;
+        while (true) {
+            System.out.println("1, Checking Account ");
+            System.out.println("2, Saving Account ");
+            System.out.println("3, Back -> ");
+            System.out.print("Choose Account: ");
+            accountType = scanner.nextLine();
+
+            if (accountType.matches("^[1-3]$")) {  // Ensures input is 1, 2, or 3
+                break;
+            } else {
+                System.out.println("Invalid input. Please choose a number between 1 and 3.");
+            }
+        }
+
+        if(accountType.equals("3")){
+            return;
+        }
         if(accountType.equals("1")){
             System.out.print("Enter amount to withdrew: ");
             String amount = scanner.nextLine();
@@ -199,10 +283,20 @@ public class Main {
         }
     }
     public static void transferMoney(){
-        System.out.println("1. Checking account -> Saving account");
-        System.out.println("1. Saving account -> Checking account");
-        System.out.print("3. back->:");
-        String accountType = scanner.nextLine();
+        String accountType;
+        while (true) {
+            System.out.println("1, Checking Account ");
+            System.out.println("2, Saving Account ");
+            System.out.println("3, Back -> ");
+            System.out.print("Choose Account: ");
+            accountType = scanner.nextLine();
+
+            if (accountType.matches("^[1-3]$")) {  // Ensures input is 1, 2, or 3
+                break;
+            } else {
+                System.out.println("Invalid input. Please choose a number between 1 and 3.");
+            }
+        }
         if(accountType.equals("3")){
             return;
         }
@@ -219,10 +313,20 @@ public class Main {
         }
     }
     public static void deleteAccount(){
-        System.out.println("1. Checking account");
-        System.out.println("1. Saving account");
-        System.out.print("3. back->:");
-        String accountType = scanner.nextLine();
+        String accountType;
+        while (true) {
+            System.out.println("1, Checking Account ");
+            System.out.println("2, Saving Account ");
+            System.out.println("3, Back -> ");
+            System.out.print("Choose Account: ");
+            accountType = scanner.nextLine();
+
+            if (accountType.matches("^[1-3]$")) {  // Ensures input is 1, 2, or 3
+                break;
+            } else {
+                System.out.println("Invalid input. Please choose a number between 1 and 3.");
+            }
+        }
         if(accountType.equals("1") && checkingAccount !=null && savingAccount !=null){
 
 

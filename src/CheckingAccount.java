@@ -11,6 +11,8 @@ public class CheckingAccount extends Account {
     @Override
     void deposit(double amount) {
         balance += amount;
+        System.out.println(Main.Colors.GREEN + "You have Deposit $" + amount  + " into your Checking account" + Main.Colors.RESET);
+
     }
 
     @Override
@@ -19,6 +21,7 @@ public class CheckingAccount extends Account {
             System.out.println("You can't not withdrew money higher than 80% in your account!");
         }else if(balance >amount){
             balance -= amount;
+            System.out.println(Main.Colors.YELLOW + "You are withdrew money: $" + amount + "From your Checking account" + Main.Colors.RESET);
         }else {
             System.out.println(Main.Colors.RED + "You don't have enough money to withdrew! you balance is:" + " $" + balance + Main.Colors.RESET);
         }
@@ -31,6 +34,7 @@ public class CheckingAccount extends Account {
         }else {
             balance -= amount;
             account.deposit(amount);
+            System.out.println(Main.Colors.GREEN + "You have transfer $" + amount + " to your Saving account" + Main.Colors.RESET);
         }
     }
 
@@ -42,16 +46,32 @@ public class CheckingAccount extends Account {
     }
 
     @Override
-    void display() {
-        System.out.println(Main.Colors.YELLOW + "\n===== Account Information =====" + Main.Colors.RESET);
-        System.out.println("Account Number: " + accountNumber);
-        System.out.println("User Name: " + userName);
-        System.out.println("Date of Birth: " + dateOfBirth);
-        System.out.println("Gender: " + gender);
-        System.out.println("Phone Number: " + phoneNumber);
-        System.out.println("Balance: $" + balance);
-        System.out.println(Main.Colors.YELLOW + "===============================" + Main.Colors.RESET);
+//    void display() {
+//        System.out.println(Main.Colors.YELLOW + "\n===== Account Information =====" + Main.Colors.RESET);
+//        System.out.println("Account Number: " + accountNumber);
+//        System.out.println("User Name: " + userName);
+//        System.out.println("Date of Birth: " + dateOfBirth);
+//        System.out.println("Gender: " + gender);
+//        System.out.println("Phone Number: " + phoneNumber);
+//        System.out.println("Balance: $" + balance);
+//        System.out.println(Main.Colors.YELLOW + "===============================" + Main.Colors.RESET);
+//
+//    }
 
+    void display() {
+        System.out.println(Main.Colors.YELLOW + "\n========================================");
+        System.out.printf("%s%-20s%s%n", Main.Colors.BLUE, "===== Account Information =====", Main.Colors.RESET);
+        System.out.println(Main.Colors.YELLOW + "========================================" + Main.Colors.RESET);
+
+        // Table-style aligned formatting
+        System.out.printf(Main.Colors.GREEN + "%-20s: %s%n" + Main.Colors.RESET, "Account Number", accountNumber);
+        System.out.printf("%-20s: %s%n", "User Name", userName);
+        System.out.printf("%-20s: %s%n", "Date of Birth", dateOfBirth);
+        System.out.printf("%-20s: %s%n", "Gender", gender);
+        System.out.printf("%-20s: %s%n", "Phone Number", phoneNumber);
+        System.out.printf(Main.Colors.GREEN + "%-20s: $%.2f%n" + Main.Colors.RESET, "Balance", balance);
+
+        System.out.println(Main.Colors.YELLOW + "========================================" + Main.Colors.RESET);
     }
 //    -----------------------------------------
 
