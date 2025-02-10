@@ -36,7 +36,7 @@ public class Main {
                      transferMoney();
                     break;
                 case "5":
-                    System.out.println(Main.Colors.YELLOW + "\n===== Account Information =====" + Main.Colors.RESET);
+                    System.out.println(Main.Colors.YELLOW + "========================================" + Main.Colors.RESET);
                      displayAccountInfo();
                     break;
                 case "6":
@@ -150,9 +150,9 @@ public class Main {
                 }
 
                 while (true) {
-                    System.out.print("Enter phone number (9 digits): ");
+                    System.out.print("Enter phone number (9-12 digits): ");
                     phone = scanner.nextLine();
-                    if (phone.matches("^\\d{9}$")) {
+                    if (phone.matches("^.{9,12}$")) {
                         break;
                     } else {
                         System.out.println("Invalid phone number. Please enter exactly 9 digits.");
@@ -195,9 +195,9 @@ public class Main {
                 }
 
                 while (true) {
-                    System.out.print("Enter phone number (9 digits): ");
+                    System.out.print("Enter phone number (9-12 digits): ");
                     phone = scanner.nextLine();
-                    if (phone.matches("^(9|1[0-2])$")) {
+                    if (phone.matches("^.{9,12}$")) {
                         break;
                     } else {
                         System.out.println("Invalid phone number. Please enter exactly 9 digits.");

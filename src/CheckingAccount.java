@@ -47,8 +47,7 @@ public class CheckingAccount extends Account {
 
     @Override
     void display() {
-        System.out.println(Main.Colors.YELLOW + "\n========================================");
-        System.out.printf("%s%-20s%s%n", Main.Colors.BLUE, "===== Account Information =====", Main.Colors.RESET);
+        System.out.printf("%s%-20s%s%n", Main.Colors.BLUE, "===== Checking Account =====", Main.Colors.RESET);
         System.out.println(Main.Colors.YELLOW + "========================================" + Main.Colors.RESET);
 
         // Table-style aligned formatting
