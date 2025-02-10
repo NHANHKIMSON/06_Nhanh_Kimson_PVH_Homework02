@@ -18,7 +18,7 @@ public class CheckingAccount extends Account {
         if(balance >amount){
             balance -= amount;
         }else {
-            System.out.println("You don't have enough money to withdrew!:" + " $" + balance);
+            System.out.println(Main.Colors.RED + "You don't have enough money to withdrew! you balance is:" + " $" + balance + Main.Colors.RESET);
         }
     }
 

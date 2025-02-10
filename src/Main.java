@@ -4,6 +4,7 @@ import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -28,7 +29,7 @@ public class Main {
                      depositMoney();
                     break;
                 case "3":
-//                     withdrawMoney();
+                     withdrawMoney();
                     break;
                 case "4":
 //                     transferMoney();
@@ -62,7 +63,12 @@ public class Main {
             System.out.println(Colors.GREEN + "Displaying Saving Account:" + Colors.RESET);
             savingAccount.display();
         } else {
-            System.out.println(Colors.RED + "Neither Checking nor Saving account is created!" + Colors.RESET);
+
+            CellStyle cellStyle = new CellStyle(CellStyle.HorizontalAlign.center);
+            Table t = new Table(1, BorderStyle.UNICODE_ROUND_BOX_WIDE, ShownBorders.ALL);
+            t.setColumnWidth(0,50,70);
+            t.addCell(Colors.RED + "Neither Checking nor Saving account is created!" + Colors.RESET , cellStyle);
+            System.out.println(t.render());
         }
     }
 
@@ -77,7 +83,6 @@ public class Main {
 
         t.addCell(Colors.RED + "Press Enter to continue..." + Colors.RESET , centerStyle);
         System.out.println(t.render());
-        scanner.nextLine();
     }
 //  ------------------------------------------------------------------------------------------------
 
@@ -112,55 +117,83 @@ public class Main {
         scanner.nextLine();
 
         if(accountType == 1){
-            System.out.print("Enter username: ");
-            String userName = scanner.nextLine();
-            System.out.print("Enter date of birth (dd-mm-yyyy): ");
-            String dob = scanner.nextLine();
-            System.out.print("Enter gender: ");
-            String gender = scanner.nextLine();
-            System.out.print("Enter phone number (9 digits): ");
-            String phone = scanner.nextLine();
+            if(checkingAccount == null){
+                System.out.print("Enter username: ");
+                String userName = scanner.nextLine();
+                System.out.print("Enter date of birth (dd-mm-yyyy): ");
+                String dob = scanner.nextLine();
+                System.out.print("Enter gender: ");
+                String gender = scanner.nextLine();
+                System.out.print("Enter phone number (9 digits): ");
+                String phone = scanner.nextLine();
 
-            accountNumber=String.valueOf((int)(Math.random()*1000000));
-            checkingAccount = new CheckingAccount(userName, dob, gender, phone, accountNumber);
+                accountNumber=String.valueOf((int)(Math.random()*1000000));
+                checkingAccount = new CheckingAccount(userName, dob, gender, phone, accountNumber);
+
+            }else {
+                System.out.println(Colors.RED + "You are already have checking account!" + Colors.RESET );
+            }
         }else {
-            System.out.print("Enter username: ");
-            String userName = scanner.nextLine();
-            System.out.print("Enter date of birth (dd-mm-yyyy): ");
-            String dob = scanner.nextLine();
-            System.out.print("Enter gender: ");
-            String gender = scanner.nextLine();
-            System.out.print("Enter phone number (9 digits): ");
-            String phone = scanner.nextLine();
+            if(savingAccount == null){
+                System.out.print("Enter username: ");
+                String userName = scanner.nextLine();
+                System.out.print("Enter date of birth (dd-mm-yyyy): ");
+                String dob = scanner.nextLine();
+                System.out.print("Enter gender: ");
+                String gender = scanner.nextLine();
+                System.out.print("Enter phone number (9 digits): ");
+                String phone = scanner.nextLine();
 
-            accountNumber = String.valueOf((int)(Math.random()*1000000));
-            savingAccount =  new SavingAccount(userName, dob, gender, phone, accountNumber);
+                accountNumber = String.valueOf((int)(Math.random()*1000000));
+                savingAccount =  new SavingAccount(userName, dob, gender, phone, accountNumber);
+            }else {
+
+                CellStyle centerStyle = new CellStyle(CellStyle.HorizontalAlign.center);
+                Table t = new Table(1, BorderStyle.UNICODE_ROUND_BOX_WIDE, ShownBorders.ALL);
+                // Set column widths
+                t.setColumnWidth(0, 50, 70);
+
+                t.addCell(Colors.RED + "You are already have Saving account!" + Colors.RESET , centerStyle);
+                System.out.println(t.render());
+            }
         }
     }
     public static void depositMoney(){
-        System.out.println("1. checking account: ");
-        System.out.println("2. saving account: ");
+        System.out.println("1, checking account ");
+        System.out.println("2, saving account ");
+        System.out.print("Choose Account:");
         String accountType = scanner.nextLine();
         if(accountType.equals("1")){
             if(checkingAccount == null){
                 System.out.println("Don't have checking account!");
             }else {
-                System.out.println("Enter money to deposit: ");
-                checkingAccount.deposit(scanner.nextInt());
+                System.out.print("Enter money to deposit: ");
+                String amount = scanner.nextLine();
+                checkingAccount.deposit(Double.parseDouble(amount));
             }
         }else {
             if(savingAccount == null){
                 System.out.println("Don't have saving account!");
             }else {
-                System.out.println("Enter money to deposit: ");
-                int amount = scanner.nextInt();
-                savingAccount.deposit(amount);
+                System.out.print("Enter money to deposit: ");
+                String amount = scanner.nextLine();
+                savingAccount.deposit(Double.parseDouble(amount));
             }
         }
     }
 
-
-
-
-
+    public static void withdrawMoney(){
+        System.out.println("1. Checking account");
+        System.out.println("1. Saving account");
+        String accountType = scanner.nextLine();
+        if(accountType.equals("1")){
+            System.out.print("Enter amount to withdrew: ");
+            String amount = scanner.nextLine();
+            checkingAccount.withdraw(Double.parseDouble(amount));
+        }else {
+            System.out.print("Enter amount to withdrew: ");
+            String amount = scanner.nextLine();
+            savingAccount.withdraw(Double.parseDouble(amount));
+        }
+    }
 }
