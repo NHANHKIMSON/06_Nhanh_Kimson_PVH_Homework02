@@ -172,6 +172,7 @@ public class Main {
                     System.out.print("Enter username: ");
                     userName = scanner.nextLine();
                     if(userName.matches("^[a-zA-Z][a-zA-Z ]*$")){
+                        System.out.println(Colors.RED + "Wrong format" + Colors.RESET);
                         break;
                     }
                 }
@@ -179,6 +180,8 @@ public class Main {
                     System.out.print("Enter date of birth (dd-mm-yyyy): ");
                     dob = scanner.nextLine();
                     if (dob.matches("^([0-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-(\\d{4})$")) {
+                        System.out.println(Colors.RED + "Wrong format" + Colors.RESET);
+
                         break;
                     } else {
                         System.out.println("Invalid date format. Please use dd-mm-yyyy.");
@@ -188,6 +191,7 @@ public class Main {
                     System.out.print("Enter gender (Male/Female/Other): ");
                     gender = scanner.nextLine();
                     if (gender.matches("(?i)^(male|female|other)$")) {
+                        System.out.println(Colors.RED + "Wrong format" + Colors.RESET);
                         break;
                     } else {
                         System.out.println("Invalid gender. Please enter Male, Female, or Other.");
@@ -198,6 +202,7 @@ public class Main {
                     System.out.print("Enter phone number (9-12 digits): ");
                     phone = scanner.nextLine();
                     if (phone.matches("^.{9,12}$")) {
+                        System.out.println(Colors.RED + "Wrong format" + Colors.RESET);
                         break;
                     } else {
                         System.out.println("Invalid phone number. Please enter exactly 9 digits.");
